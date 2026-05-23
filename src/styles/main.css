@@ -428,166 +428,190 @@ svg,
   forced-color-adjust: none !important;
 }
 
-/* --- 6. 고품격 Y2K 미니홈피 다크모드 테마 스킨 --- */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --cy-gray-bg: #111827; /* 어두운 슬레이트 그레이 외곽 배경 */
-    --cy-frame-border: #1e293b;
-    --cy-inner-border: #334155;
-    --cy-body-bg: #0f172a; /* 다이어리 안쪽 속지 어두운 배경 */
-    --cy-inner-bg: #1e293b; /* 메인 컨텐츠 영역 */
-    --cy-text-black: #f8fafc; /* 화사하고 가독성 높은 연회색 텍스트 */
-    --cy-text-muted: #94a3b8; /* 설명용 회색 */
-    --cy-border-color: #334155;
-    --cy-orange-light: #2d1910; /* 다크 테마용 다크 오렌지 믹스 */
-    --cy-orange-pale: #1f100a;
-  }
+/* --- 6. 고품격 Y2K 미니홈피 다크모드 테마 스킨 (.dark-theme 클래스 적용 시) --- */
+.dark-theme {
+  --cy-gray-bg: #111827; /* 어두운 슬레이트 그레이 외곽 배경 */
+  --cy-frame-border: #1e293b;
+  --cy-inner-border: #334155;
+  --cy-body-bg: #0f172a; /* 다이어리 안쪽 속지 어두운 배경 */
+  --cy-inner-bg: #1e293b; /* 메인 컨텐츠 영역 */
+  --cy-text-black: #f8fafc; /* 화사하고 가독성 높은 연회색 텍스트 */
+  --cy-text-muted: #94a3b8; /* 설명용 회색 */
+  --cy-border-color: #334155;
+  --cy-orange-light: #2d1910; /* 다크 테마용 다크 오렌지 믹스 */
+  --cy-orange-pale: #1f100a;
+}
 
-  body {
-    background-color: #030712;
-    background-image: 
-      radial-gradient(rgba(75, 85, 99, 0.4) 1.5px, transparent 1.5px),
-      radial-gradient(rgba(75, 85, 99, 0.4) 1.5px, transparent 1.5px);
-  }
+/* 다크모드 시 글로벌 배경 및 레이아웃 강제 지정 */
+body:has(.dark-theme) {
+  background-color: #030712 !important;
+  background-image: 
+    radial-gradient(rgba(75, 85, 99, 0.4) 1.5px, transparent 1.5px),
+    radial-gradient(rgba(75, 85, 99, 0.4) 1.5px, transparent 1.5px) !important;
+}
 
-  /* 다이어리 3D 기기 프레임 다크 엠보싱으로 변경 */
-  .mini-homepage-container {
-    background-color: #1e293b;
-    border: 1px solid #0f172a;
-    border-top: 1px solid #334155;
-    border-left: 1px solid #334155;
-    box-shadow: 
-      0px 12px 30px rgba(0, 0, 0, 0.6),
-      inset 1px 1px 0px rgba(255, 255, 255, 0.08),
-      inset -1px -1px 0px rgba(0, 0, 0, 0.35);
-  }
+/* 다이어리 3D 기기 프레임 다크 엠보싱으로 변경 */
+.dark-theme.mini-homepage-container {
+  background-color: #1e293b !important;
+  border: 1px solid #0f172a !important;
+  border-top: 1px solid #334155 !important;
+  border-left: 1px solid #334155 !important;
+  box-shadow: 
+    0px 12px 30px rgba(0, 0, 0, 0.6),
+    inset 1px 1px 0px rgba(255, 255, 255, 0.08),
+    inset -1px -1px 0px rgba(0, 0, 0, 0.35) !important;
+}
 
-  .homepage-board {
-    background-color: #111827;
-    border: 2px solid #0f172a;
-    box-shadow: 
-      inset 1px 1px 0px rgba(255, 255, 255, 0.03),
-      inset -1px -1px 0px #030712;
-  }
+.dark-theme .homepage-board {
+  background-color: #111827 !important;
+  border: 2px solid #0f172a !important;
+  box-shadow: 
+    inset 1px 1px 0px rgba(255, 255, 255, 0.03),
+    inset -1px -1px 0px #030712 !important;
+}
 
-  .homepage-body {
-    background-color: #0f172a;
-    border: 1px solid #1e293b;
-    box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.5);
-  }
+.dark-theme .homepage-body {
+  background-color: #0f172a !important;
+  border: 1px solid #1e293b !important;
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.5) !important;
+}
 
-  .profile-box {
-    background-color: #111827;
-    border: 1px solid #1e293b;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  }
+.dark-theme .profile-box {
+  background-color: #111827 !important;
+  border: 1px solid #1e293b !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important;
+}
 
-  .profile-img-wrapper {
-    background: #0f172a;
-    border: 1px solid #1e293b;
-  }
+.dark-theme .profile-img-wrapper {
+  background: #0f172a !important;
+  border: 1px solid #1e293b !important;
+}
 
-  .profile-desc {
-    background: #2d1910;
-    border: 1px solid #4d200a;
-    color: #cbd5e1;
-  }
+.dark-theme .profile-desc {
+  background: #2d1910 !important;
+  border: 1px solid #4d200a !important;
+  color: #cbd5e1 !important;
+}
 
-  .profile-couple-info {
-    background: #0f172a;
-    border: 1px solid #1e293b;
-  }
+.dark-theme .profile-couple-info {
+  background: #0f172a !important;
+  border: 1px solid #1e293b !important;
+}
 
-  .couple-details {
-    color: #94a3b8;
-  }
+.dark-theme .couple-details {
+  color: #94a3b8 !important;
+}
 
-  .wave-select {
-    background: #111827;
-    border: 1px solid var(--cy-orange);
-    color: var(--cy-orange);
-  }
+.dark-theme .wave-select {
+  background: #111827 !important;
+  border: 1px solid var(--cy-orange) !important;
+  color: var(--cy-orange) !important;
+}
 
-  .homepage-right-col {
-    background-color: #111827;
-    border: 1px solid #1e293b;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  }
+.dark-theme .homepage-right-col {
+  background-color: #111827 !important;
+  border: 1px solid #1e293b !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important;
+}
 
-  .visitor-counter {
-    background: #0f172a;
-    border: 1px solid #1e293b;
-  }
+.dark-theme .visitor-counter {
+  background: #0f172a !important;
+  border: 1px solid #1e293b !important;
+}
 
-  .homepage-title {
-    color: #f8fafc;
-  }
+.dark-theme .homepage-title {
+  color: #f8fafc !important;
+}
 
-  /* 메뉴 탭 다크화 */
-  .menu-tab {
-    background-color: #1e293b;
-    border: 1px solid #0f172a;
-    border-left: none;
-    box-shadow: 
-      2px 2px 4px rgba(0, 0, 0, 0.4),
-      inset 1px 1px 0px rgba(255, 255, 255, 0.05);
-  }
+/* 메뉴 탭 다크화 */
+.dark-theme .menu-tab {
+  background-color: #1e293b !important;
+  border: 1px solid #0f172a !important;
+  border-left: none !important;
+  box-shadow: 
+    2px 2px 4px rgba(0, 0, 0, 0.4),
+    inset 1px 1px 0px rgba(255, 255, 255, 0.05) !important;
+}
 
-  .menu-tab.active {
-    background-color: var(--cy-orange);
-    border-color: var(--cy-orange-hover);
-    box-shadow: 
-      3px 2px 5px rgba(0, 0, 0, 0.5),
-      inset 1px 1px 0px rgba(255, 255, 255, 0.2);
-  }
+.dark-theme .menu-tab.active {
+  background-color: var(--cy-orange) !important;
+  border-color: var(--cy-orange-hover) !important;
+  box-shadow: 
+    3px 2px 5px rgba(0, 0, 0, 0.5),
+    inset 1px 1px 0px rgba(255, 255, 255, 0.2) !important;
+}
 
-  .menu-tab:hover:not(.active) {
-    background-color: #334155;
-  }
+.dark-theme .menu-tab:hover:not(.active) {
+  background-color: #334155 !important;
+}
 
-  /* 각 다이어리 탭(방명록, 사진첩 등) 다크 테마 대응 */
-  input, textarea, select {
-    background-color: #0f172a !important;
-    color: #f8fafc !important;
-    border: 1px solid #1e293b !important;
-  }
+/* 각 다이어리 탭(방명록, 사진첩 등) 다크 테마 대응 */
+.dark-theme input, 
+.dark-theme textarea, 
+.dark-theme select {
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+  border: 1px solid #1e293b !important;
+}
 
-  /* 방명록 리스트 아이템 등의 보더라인 및 배경 조율 */
-  .guestbook-post, .diary-post, .comment-box {
-    background: #1e293b !important;
-    border: 1px solid #334155 !important;
-    color: #cbd5e1 !important;
-  }
+/* 방명록 리스트 아이템 등의 보더라인 및 배경 조율 */
+.dark-theme .guestbook-post, 
+.dark-theme .diary-post, 
+.dark-theme .comment-box {
+  background: #1e293b !important;
+  border: 1px solid #334155 !important;
+  color: #cbd5e1 !important;
+}
 
-  .post-header {
-    background: #0f172a !important;
-    color: #f8fafc !important;
-    border-bottom: 1px solid #334155 !important;
-  }
+.dark-theme .post-header {
+  background: #0f172a !important;
+  color: #f8fafc !important;
+  border-bottom: 1px solid #334155 !important;
+}
 
-  /* 미니룸 배경 및 오버레이 조정 */
-  .miniroom-canvas {
-    border: 3px double #334155 !important;
-  }
+/* 미니룸 배경 및 오버레이 조정 */
+.dark-theme .miniroom-canvas {
+  border: 3px double #334155 !important;
+}
 
-  .miniroom-title-bar {
-    background: #1e293b !important;
-    border-bottom: 1px solid #334155 !important;
-  }
+.dark-theme .miniroom-title-bar {
+  background: #1e293b !important;
+  border-bottom: 1px solid #334155 !important;
+}
 
-  /* 스펙타클한 캐릭터 쉴드 강제 부여 */
-  svg, 
-  .minime-sprite,
-  .minime-sprite svg, 
-  .minime-sprite path, 
-  .minime-sprite circle, 
-  .minime-sprite ellipse, 
-  .minime-sprite rect,
-  .minime-sprite g {
-    color-scheme: light !important;
-    filter: none !important;
-    forced-color-adjust: none !important;
-  }
+/* 스펙타클한 캐릭터 쉴드 강제 부여 */
+svg, 
+.minime-sprite,
+.minime-sprite svg, 
+.minime-sprite path, 
+.minime-sprite circle, 
+.minime-sprite ellipse, 
+.minime-sprite rect,
+.minime-sprite g {
+  color-scheme: light !important;
+  filter: none !important;
+  forced-color-adjust: none !important;
+}
+
+/* 밤하늘 가랜드 전구 반짝임 및 별빛 효과 키프레임 */
+@keyframes bulb-glow {
+  0% { filter: drop-shadow(0 0 1px #ffd43b); opacity: 0.6; }
+  50% { filter: drop-shadow(0 0 7px #ffd43b) brightness(1.2); opacity: 1; }
+  100% { filter: drop-shadow(0 0 1px #ffd43b); opacity: 0.6; }
+}
+
+@keyframes star-twinkle {
+  0% { transform: scale(0.8); opacity: 0.3; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(0.8); opacity: 0.3; }
+}
+
+.night-bulb-active {
+  animation: bulb-glow 1.5s infinite alternate ease-in-out;
+}
+
+.night-star {
+  animation: star-twinkle 2s infinite ease-in-out;
 }
 
 /* Responsive refinements for Desktop */

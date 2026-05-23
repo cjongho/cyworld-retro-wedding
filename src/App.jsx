@@ -18,6 +18,28 @@ export default function App() {
   const [todayVisitors, setTodayVisitors] = useState(1);
   const [totalVisitors, setTotalVisitors] = useState(1);
   
+  // 1. Dark Mode / Light Mode Theme Toggle State
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // Sync theme with local storage & media preferences
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("cyworld_theme");
+    if (savedTheme) {
+      setIsDarkMode(savedTheme === "dark");
+    } else {
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      setIsDarkMode(prefersDark);
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    setIsDarkMode((prev) => {
+      const next = !prev;
+      localStorage.setItem("cyworld_theme", next ? "dark" : "light");
+      return next;
+    });
+  };
+
   // Dynamic scale responsive system for mobile landscape preservation
   const [windowSize, setWindowSize] = useState({
     width: typeof window !== "undefined" ? window.innerWidth : 800,
@@ -76,7 +98,7 @@ export default function App() {
   const renderActiveTab = () => {
     switch (activeTab) {
       case "home":
-        return <HomeTab guestAvatar={guestAvatar} />;
+        return <HomeTab guestAvatar={guestAvatar} isDarkMode={isDarkMode} />;
       case "diary":
         return <DiaryTab />;
       case "gallery":
@@ -185,7 +207,7 @@ export default function App() {
         }}>
           
           {/* Main Cyworld Double-Border Frame */}
-          <div className="mini-homepage-container" style={{ margin: "0 auto" }}>
+          <div className={`mini-homepage-container ${isDarkMode ? "dark-theme" : ""}`} style={{ margin: "0 auto" }}>
             <div className="homepage-board">
               
               {/* Header area */}
@@ -202,7 +224,30 @@ export default function App() {
                   🏡 [쭁♥꾱] 우리 결혼합니다! 축하 미니홈피 💍
                 </div>
                 
-                <BGMPlayer />
+                <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                  {/* Y2K Beveled Theme Toggle Button */}
+                  <button
+                    onClick={toggleTheme}
+                    style={{
+                      background: isDarkMode ? "linear-gradient(135deg, #374151 0%, #111827 100%)" : "linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%)",
+                      color: isDarkMode ? "#fbbf24" : "#475569",
+                      border: isDarkMode ? "1px solid #1e293b" : "1px solid #cbd5e1",
+                      borderRadius: "4px",
+                      padding: "3px 7px",
+                      fontSize: "9px",
+                      fontWeight: "bold",
+                      cursor: "pointer",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "3px",
+                      boxShadow: isDarkMode ? "inset 0 1px 0 rgba(255,255,255,0.05), 0 1px 2px rgba(0,0,0,0.3)" : "inset 0 1px 0 #ffffff, 0 1px 2px rgba(0,0,0,0.06)",
+                      transition: "all 0.15s"
+                    }}
+                  >
+                    <span>{isDarkMode ? "🌙 밤 모드" : "☀️ 낮 모드"}</span>
+                  </button>
+                  <BGMPlayer />
+                </div>
               </header>
 
               {/* Core Content Layout (Always Row / dual columns) */}

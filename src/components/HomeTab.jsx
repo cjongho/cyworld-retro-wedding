@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Miniroom from "./Miniroom";
 import { Sparkles, ArrowRight, Squirrel } from "lucide-react";
 
-export default function HomeTab({ guestAvatar }) {
+export default function HomeTab({ guestAvatar, isDarkMode }) {
   const [acornsCount, setAcornsCount] = useState(0);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export default function HomeTab({ guestAvatar }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "10px", width: "100%" }}>
       {/* 2.5D Isometric Miniroom */}
-      <Miniroom guestAvatar={guestAvatar} onAcornGathered={handleAcornGathered} />
+      <Miniroom guestAvatar={guestAvatar} onAcornGathered={handleAcornGathered} isDarkMode={isDarkMode} />
 
       {/* Gamified Acorn Inventory Widget */}
       <div style={{

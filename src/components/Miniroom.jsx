@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { MinimeSprite } from "./CharacterCreator";
 
-export default function Miniroom({ guestAvatar, onAcornGathered }) {
+export default function Miniroom({ guestAvatar, onAcornGathered, isDarkMode }) {
   const [activeBubble, setActiveBubble] = useState(null); // 'groom', 'bride', 'guest', or null
   const [isTreeShaking, setIsTreeShaking] = useState(false);
   const [acorns, setAcorns] = useState([]); // Array of falling acorns
@@ -133,10 +133,23 @@ export default function Miniroom({ guestAvatar, onAcornGathered }) {
     <div className="miniroom-canvas">
       <div className="miniroom-title-bar">
         <span>MINIROOM: 쭁♥꾱의 로맨틱 야외 가든 웨딩 💒</span>
-        <span style={{ fontSize: "8px", opacity: 0.9 }}>정원 나무를 흔들어 도토리를 모아보세요! 🐿️</span>
+        <span style={{ fontSize: "8px", opacity: 0.9 }}>{isDarkMode ? "✨ 낭만적인 밤 정원에 알전구가 반짝입니다! 💡" : "정원 나무를 흔들어 도토리를 모아보세요! 🐿️"}</span>
       </div>
 
-      <div className="miniroom-scenery">
+      <div className="miniroom-scenery" style={{ background: isDarkMode ? "linear-gradient(to bottom, #091220 0%, #1e293b 100%)" : "linear-gradient(to bottom, #dbeafe 0%, #ffffff 100%)" }}>
+        {/* Star & Firefly overlays in dark mode */}
+        {isDarkMode && (
+          <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", pointerEvents: "none", zIndex: 1 }}>
+            <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <circle cx="15" cy="20" r="1.2" fill="#fffbeb" className="night-star" style={{ animationDelay: "0s" }} />
+              <circle cx="45" cy="15" r="1.5" fill="#ffd43b" className="night-star" style={{ animationDelay: "0.5s" }} />
+              <circle cx="75" cy="25" r="1.0" fill="#ffffff" className="night-star" style={{ animationDelay: "1s" }} />
+              <circle cx="90" cy="10" r="1.3" fill="#ffe3e2" className="night-star" style={{ animationDelay: "1.5s" }} />
+              <circle cx="30" cy="30" r="1.0" fill="#a5f3fc" className="night-star" style={{ animationDelay: "0.8s" }} />
+              <circle cx="60" cy="28" r="1.4" fill="#ffffff" className="night-star" style={{ animationDelay: "0.3s" }} />
+            </svg>
+          </div>
+        )}
         {/* Gradients & Filters for Miniroom Elements */}
         <svg style={{ position: "absolute", width: 0, height: 0 }}>
           <defs>
@@ -154,34 +167,53 @@ export default function Miniroom({ guestAvatar, onAcornGathered }) {
               <stop offset="50%" stopColor="#f7f9fa" />
               <stop offset="100%" stopColor="#e3ebf0" />
             </linearGradient>
+            <linearGradient id="piano_dark" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#1e293b" />
+              <stop offset="50%" stopColor="#0f172a" />
+              <stop offset="100%" stopColor="#020617" />
+            </linearGradient>
             <radialGradient id="balloon_grad" cx="35%" cy="35%" r="65%">
               <stop offset="0%" stopColor="#ff8a80" />
               <stop offset="60%" stopColor="#e53935" />
               <stop offset="100%" stopColor="#b71c1c" />
             </radialGradient>
+            <radialGradient id="balloon_dark_grad" cx="35%" cy="35%" r="65%">
+              <stop offset="0%" stopColor="#a5f3fc" />
+              <stop offset="60%" stopColor="#06b6d4" />
+              <stop offset="100%" stopColor="#083344" />
+            </radialGradient>
             <linearGradient id="leaf_left" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stopColor="#a5d6a7" />
               <stop offset="100%" stopColor="#388e3c" />
+            </linearGradient>
+            <linearGradient id="leaf_dark" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#3b82f6" />
+              <stop offset="100%" stopColor="#1e3a8a" />
             </linearGradient>
             <linearGradient id="cherry_blossom" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stopColor="#ffebee" />
               <stop offset="60%" stopColor="#f8bbd0" />
               <stop offset="100%" stopColor="#f48fb1" />
             </linearGradient>
+            <linearGradient id="blossom_dark" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#c084fc" />
+              <stop offset="60%" stopColor="#8b5cf6" />
+              <stop offset="100%" stopColor="#5b21b6" />
+            </linearGradient>
           </defs>
         </svg>
 
         {/* --- Floating Red Balloon Invitation --- */}
         <div className="floating-present" onClick={() => { setShowPresentModal(true); playSimpleSynth(660); }}>
-          {/* Beautiful 3D Translucent Red Heart Balloon */}
+          {/* Beautiful 3D Translucent Heart Balloon */}
           <svg width="36" height="42" viewBox="0 0 40 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M20 40 C20 40, 38 26, 38 15 C38 6, 30 1, 20 9 C10 1, 2 6, 2 15 C2 26, 20 40, 20 40 Z" fill="url(#balloon_grad)" stroke="#9c0c0c" strokeWidth="1"/>
-            <path d="M20 40 L17 43 H23 L20 40 Z" fill="#b71c1c" stroke="#9c0c0c" strokeWidth="0.8"/>
+            <path d="M20 40 C20 40, 38 26, 38 15 C38 6, 30 1, 20 9 C10 1, 2 6, 2 15 C2 26, 20 40, 20 40 Z" fill={isDarkMode ? "url(#balloon_dark_grad)" : "url(#balloon_grad)"} stroke={isDarkMode ? "#083344" : "#9c0c0c"} strokeWidth="1"/>
+            <path d="M20 40 L17 43 H23 L20 40 Z" fill={isDarkMode ? "#083344" : "#b71c1c"} stroke={isDarkMode ? "#083344" : "#9c0c0c"} strokeWidth="0.8"/>
             {/* Highlight */}
             <path d="M10 9 C6 13, 6 18, 9 20" stroke="#ffffff" strokeWidth="2.5" strokeLinecap="round" opacity="0.6"/>
           </svg>
           <div className="balloon-string"></div>
-          {/* Elegant gold tied letter envelope instead of box */}
+          {/* Elegant gold tied letter envelope */}
           <svg className="gift-box" width="28" height="20" viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect x="1" y="2" width="30" height="20" rx="3" fill="#fffaf0" stroke="#d4af37" strokeWidth="1.5"/>
             <path d="M1 2 L16 13 L31 2" stroke="#d4af37" strokeWidth="1.5" fill="none"/>
@@ -201,11 +233,19 @@ export default function Miniroom({ guestAvatar, onAcornGathered }) {
             {/* Fine Grass Roots */}
             <ellipse cx="35" cy="96" rx="12" ry="3.5" fill="#81c784" opacity="0.8"/>
             
-            {/* Elegant Soft Layered Green foliage */}
-            <path d="M35 5 C15 5, 2 22, 15 45 C5 52, 18 68, 35 68 C52 68, 65 52, 55 45 C68 22, 55 5, 35 5 Z" fill="url(#leaf_left)" stroke="#2e7d32" strokeWidth="1.2"/>
+            {/* Elegant Soft Layered Green/Night foliage */}
+            <path d="M35 5 C15 5, 2 22, 15 45 C5 52, 18 68, 35 68 C52 68, 65 52, 55 45 C68 22, 55 5, 35 5 Z" fill={isDarkMode ? "url(#leaf_dark)" : "url(#leaf_left)"} stroke={isDarkMode ? "#1e3a8a" : "#2e7d32"} strokeWidth="1.2"/>
             
             {/* Shiny Bulbs String */}
             <path d="M12 32 Q35 48 58 32" stroke="#ffe082" strokeWidth="1" strokeDasharray="3 3" fill="none"/>
+            {/* Twinkling light aura circles in dark mode */}
+            {isDarkMode && (
+              <>
+                <circle cx="20" cy="36" r="6" fill="#ffe082" opacity="0.4" className="night-bulb-active" />
+                <circle cx="35" cy="40" r="6" fill="#ffe082" opacity="0.4" className="night-bulb-active" />
+                <circle cx="50" cy="36" r="6" fill="#ffe082" opacity="0.4" className="night-bulb-active" />
+              </>
+            )}
             <circle cx="20" cy="36" r="2.5" fill="#fff9c4" stroke="#ffeb3b" strokeWidth="0.5"/>
             <circle cx="35" cy="40" r="2.5" fill="#fff9c4" stroke="#ffeb3b" strokeWidth="0.5"/>
             <circle cx="50" cy="36" r="2.5" fill="#fff9c4" stroke="#ffeb3b" strokeWidth="0.5"/>
@@ -260,9 +300,9 @@ export default function Miniroom({ guestAvatar, onAcornGathered }) {
         <div className="isometric-element wedding-piano" onClick={handlePianoClick}>
           <svg width="100%" height="100%" viewBox="0 0 60 70" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ filter: "drop-shadow(0 4px 6px rgba(124,93,65,0.15))" }}>
             {/* Smooth Piano Body */}
-            <path d="M4 26 C4 23, 12 18, 25 18 H52 C55 18, 56 22, 56 26 V52 C56 55, 52 57, 48 57 H12 C6 57, 4 54, 4 50 Z" fill="url(#piano_body)" stroke="#a6afb8" strokeWidth="1.2"/>
+            <path d="M4 26 C4 23, 12 18, 25 18 H52 C55 18, 56 22, 56 26 V52 C56 55, 52 57, 48 57 H12 C6 57, 4 54, 4 50 Z" fill={isDarkMode ? "url(#piano_dark)" : "url(#piano_body)"} stroke={isDarkMode ? "#334155" : "#a6afb8"} strokeWidth="1.2"/>
             {/* Keyboard Lid opened */}
-            <path d="M4 26 L26 4 L50 26 H4Z" fill="#ffffff" stroke="#b8c5d3" strokeWidth="1"/>
+            <path d="M4 26 L26 4 L50 26 H4Z" fill={isDarkMode ? "#1e293b" : "#ffffff"} stroke={isDarkMode ? "#334155" : "#b8c5d3"} strokeWidth="1"/>
             
             {/* Ivory Keyboard */}
             <rect x="8" y="28" width="44" height="8" fill="white" stroke="#333" strokeWidth="0.8"/>
@@ -279,7 +319,7 @@ export default function Miniroom({ guestAvatar, onAcornGathered }) {
             {/* Gold details */}
             <path d="M26 38 H34 V40 H26 Z" fill="#ffd700"/>
             {/* Music stand & sheet */}
-            <rect x="22" y="22" width="16" height="5" fill="#fff" stroke="#90a4ae" strokeWidth="0.5"/>
+            <rect x="22" y="22" width="16" height="5" fill={isDarkMode ? "#0f172a" : "#fff"} stroke="#90a4ae" strokeWidth="0.5"/>
             <line x1="25" y1="24" x2="35" y2="24" stroke="#90a4ae" strokeWidth="0.8"/>
           </svg>
         </div>
@@ -310,12 +350,12 @@ export default function Miniroom({ guestAvatar, onAcornGathered }) {
           <svg width="100%" height="100%" viewBox="0 0 70 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M31 55 C31 55, 28 92, 26 96 H44 C42 92, 39 55, 39 55 Z" fill="#8d6e63" stroke="#5d4037" strokeWidth="1.2"/>
             
-            {/* Dreamy Pink Blossom Clouds */}
-            <circle cx="35" cy="32" r="23" fill="url(#cherry_blossom)" stroke="#f48fb1" strokeWidth="1"/>
-            <circle cx="21" cy="42" r="16" fill="url(#cherry_blossom)" stroke="#f48fb1" strokeWidth="1"/>
-            <circle cx="49" cy="42" r="16" fill="url(#cherry_blossom)" stroke="#f48fb1" strokeWidth="1"/>
+            {/* Dreamy Pink/Night Blossom Clouds */}
+            <circle cx="35" cy="32" r="23" fill={isDarkMode ? "url(#blossom_dark)" : "url(#cherry_blossom)"} stroke={isDarkMode ? "#8b5cf6" : "#f48fb1"} strokeWidth="1"/>
+            <circle cx="21" cy="42" r="16" fill={isDarkMode ? "url(#blossom_dark)" : "url(#cherry_blossom)"} stroke={isDarkMode ? "#8b5cf6" : "#f48fb1"} strokeWidth="1"/>
+            <circle cx="49" cy="42" r="16" fill={isDarkMode ? "url(#blossom_dark)" : "url(#cherry_blossom)"} stroke={isDarkMode ? "#8b5cf6" : "#f48fb1"} strokeWidth="1"/>
             
-            {/* Little cherry flowers decoration */}
+            {/* Little flowers decoration */}
             <circle cx="25" cy="32" r="2" fill="#fff"/>
             <circle cx="45" cy="36" r="2" fill="#fff"/>
             <circle cx="34" cy="46" r="1.5" fill="#fff"/>
