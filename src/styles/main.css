@@ -1,0 +1,422 @@
+/* src/styles/main.css */
+
+/* --- 1. Font & Design Tokens --- */
+@import url('./miniroom.css');
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css');
+
+:root {
+  --cy-orange: #ff6600;
+  --cy-orange-light: #ffefe5;
+  --cy-orange-hover: #e65c00;
+  --cy-orange-pale: #fff6f0;
+  --cy-gray-bg: #8fabbb; /* Cyworld-style blue-grey background */
+  --cy-frame-border: #7c91a0;
+  --cy-inner-border: #a6afb8;
+  --cy-body-bg: #ececec;
+  --cy-inner-bg: #ffffff;
+  --cy-text-black: #333333;
+  --cy-text-muted: #666666;
+  --cy-text-blue: #0968ca;
+  --cy-border-color: #b0bec5;
+  
+  /* Rarity Colors - Soft Pastel Aura */
+  --color-common: #78909c;
+  --color-rare: #ff9800;
+  --color-unique: #9c27b0;
+  --color-super-rare: #e91e63;
+}
+
+/* --- 2. Base Reset --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Malgun Gothic", "맑은 고딕", sans-serif;
+  letter-spacing: -0.02em;
+}
+
+body {
+  background-color: var(--cy-gray-bg);
+  background-image: 
+    radial-gradient(rgba(124, 145, 160, 0.5) 1.5px, transparent 1.5px),
+    radial-gradient(rgba(124, 145, 160, 0.5) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+  background-position: 0 0, 12px 12px;
+  color: var(--cy-text-black);
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#root {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 8px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Scrollbar styling - Fine & clean */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #f5f5f5;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* --- 3. Cyworld Double-Border Frame Layout --- */
+/* Embossed realistic diary device texture */
+.mini-homepage-container {
+  width: 730px;
+  background-color: #a0b6c6;
+  border: 1px solid #6b8090;
+  border-top: 1px solid #b3c7d6;
+  border-left: 1px solid #b3c7d6;
+  border-radius: 12px;
+  padding: 8px 10px 16px 8px;
+  box-shadow: 
+    0px 12px 30px rgba(0, 0, 0, 0.22),
+    inset 1px 1px 0px rgba(255, 255, 255, 0.4),
+    inset -1px -1px 0px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+/* Classic outer silver/blue board with bevel lip */
+.homepage-board {
+  width: 100%;
+  background-color: #ffffff;
+  border: 2px solid #5a7788;
+  border-radius: 8px;
+  padding: 8px;
+  position: relative;
+  box-shadow: 
+    inset 1px 1px 0px #ffffff,
+    inset -1px -1px 0px #cfd8dc;
+}
+
+/* Header with Visitor Counter - Super clean 9pt text layout */
+.homepage-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 11px;
+}
+
+.visitor-counter {
+  font-size: 9px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  background: #f8fafc;
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid #e2e8f0;
+  font-weight: 500;
+}
+
+.visitor-counter .today {
+  color: #ff3d00;
+  font-weight: bold;
+}
+
+.homepage-title {
+  font-size: 11px;
+  color: var(--cy-text-black);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 60%;
+  font-weight: bold;
+}
+
+/* Main Body Frame - Elegant soft-grey inside with inner bevel shadow */
+.homepage-body {
+  background-color: #e2e8f0;
+  border: 1px solid #b8c5d3;
+  border-radius: 6px;
+  padding: 8px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  min-height: 520px;
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+/* --- Left Column (Profile Box) --- */
+.homepage-left-col {
+  width: 200px;
+  flex-shrink: 0;
+}
+
+.profile-box {
+  background-color: white;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+}
+
+.today-mood {
+  font-size: 10px;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dashed #cbd5e1;
+  padding-bottom: 5px;
+}
+
+.profile-img-wrapper {
+  width: 100%;
+  aspect-ratio: 1.2;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  padding: 4px;
+  background: #f8fafc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+.profile-desc {
+  font-size: 10px;
+  color: #475569;
+  line-height: 1.5;
+  background: var(--cy-orange-pale);
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ffe3d1;
+  text-align: left;
+  min-height: 55px;
+}
+
+.profile-couple-info {
+  background: #f8fafc;
+  border: 1px solid #f1f5f9;
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.01);
+}
+
+.couple-names {
+  text-align: center;
+  font-weight: bold;
+  color: var(--cy-orange);
+  margin-bottom: 4px;
+  font-size: 11px;
+}
+
+.couple-details {
+  text-align: center;
+  color: #64748b;
+  font-size: 9px;
+  line-height: 1.4;
+}
+
+.wave-links {
+  margin-top: auto;
+}
+
+.wave-select {
+  width: 100%;
+  padding: 6px;
+  border: 1px solid var(--cy-orange);
+  border-radius: 4px;
+  background: white;
+  color: var(--cy-orange);
+  font-size: 11px;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 1px 2px rgba(255, 102, 0, 0.08);
+}
+
+.wave-select:hover {
+  background: var(--cy-orange-light);
+}
+
+/* --- Right Column (Main Viewport) --- */
+.homepage-right-col {
+  background-color: white;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 10px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 504px;
+  position: relative;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+}
+
+/* --- Orange Navigation Tabs (Side Protruding PC style - embossed Y2K shape) --- */
+.homepage-tabs {
+  position: absolute;
+  right: -58px;
+  top: 50px;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: 0;
+  width: 60px;
+  display: flex;
+}
+
+.menu-tab {
+  background-color: #64748b;
+  color: white;
+  border: 1px solid #475569;
+  border-left: none;
+  padding: 10px 4px;
+  border-radius: 0 6px 6px 0;
+  font-size: 10px;
+  font-weight: 500;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  height: 65px;
+  width: 58px;
+  cursor: pointer;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: center;
+  box-shadow: 
+    2px 2px 4px rgba(0,0,0,0.1),
+    inset 1px 1px 0px rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-tab.active {
+  background-color: var(--cy-orange);
+  border-color: var(--cy-orange-hover);
+  color: white;
+  font-weight: bold;
+  width: 63px;
+  transform: translateX(5px);
+  box-shadow: 
+    3px 2px 5px rgba(0,0,0,0.15),
+    inset 1px 1px 0px rgba(255,255,255,0.25);
+}
+
+.menu-tab:hover:not(.active) {
+  background-color: #475569;
+  width: 60px;
+  transform: translateX(2px);
+}
+
+/* --- Rarity Grade Visual Effects (Soft Smooth Pastel Glows) --- */
+@keyframes rare-glow {
+  0% { box-shadow: 0 0 4px rgba(255, 152, 0, 0.3); border-color: rgba(255, 152, 0, 0.5); }
+  50% { box-shadow: 0 0 12px rgba(255, 152, 0, 0.75); border-color: rgba(255, 152, 0, 1); }
+  100% { box-shadow: 0 0 4px rgba(255, 152, 0, 0.3); border-color: rgba(255, 152, 0, 0.5); }
+}
+
+@keyframes unique-glow {
+  0% { box-shadow: 0 0 6px rgba(156, 39, 176, 0.4); filter: drop-shadow(0 0 1px rgba(156, 39, 176, 0.3)); border-color: rgba(156, 39, 176, 0.5); }
+  50% { box-shadow: 0 0 16px rgba(156, 39, 176, 0.85); filter: drop-shadow(0 0 6px rgba(156, 39, 176, 0.6)); border-color: rgba(156, 39, 176, 1); }
+  100% { box-shadow: 0 0 6px rgba(156, 39, 176, 0.4); filter: drop-shadow(0 0 1px rgba(156, 39, 176, 0.3)); border-color: rgba(156, 39, 176, 0.5); }
+}
+
+@keyframes super-rare-glow {
+  0% { box-shadow: 0 0 8px rgba(233, 30, 99, 0.5); filter: drop-shadow(0 0 2px rgba(233, 30, 99, 0.4)) hue-rotate(0deg); border-color: rgba(233, 30, 99, 0.6); }
+  50% { box-shadow: 0 0 22px rgba(233, 30, 99, 0.95); filter: drop-shadow(0 0 8px rgba(233, 30, 99, 0.85)) hue-rotate(15deg); border-color: rgba(233, 30, 99, 1); }
+  100% { box-shadow: 0 0 8px rgba(233, 30, 99, 0.5); filter: drop-shadow(0 0 2px rgba(233, 30, 99, 0.4)) hue-rotate(0deg); border-color: rgba(233, 30, 99, 0.6); }
+}
+
+.rare-effect {
+  animation: rare-glow 2s infinite ease-in-out;
+  border: 1px solid var(--color-rare) !important;
+}
+
+.unique-effect {
+  animation: unique-glow 2.5s infinite ease-in-out;
+  border: 1.5px solid var(--color-unique) !important;
+}
+
+.super-rare-effect {
+  animation: super-rare-glow 1.8s infinite ease-in-out;
+  border: 2px solid var(--color-super-rare) !important;
+}
+
+/* Wing flapping animation (Smooth transitions) */
+@keyframes flap-wings {
+  0% { transform: scaleX(1) rotate(0deg); }
+  50% { transform: scaleX(1.08) rotate(12deg) translateY(-1px); }
+  100% { transform: scaleX(1) rotate(0deg); }
+}
+
+.flapping-wing-left {
+  animation: flap-wings 1.2s infinite ease-in-out;
+  transform-origin: right center;
+}
+
+.flapping-wing-right {
+  animation: flap-wings 1.2s infinite ease-in-out;
+  transform-origin: left center;
+}
+
+/* Sparkles animation - Smooth Floating circles */
+@keyframes sparkle-float {
+  0% { transform: translateY(0) scale(0.8); opacity: 0; }
+  50% { transform: translateY(-8px) scale(1.1); opacity: 0.8; }
+  100% { transform: translateY(-16px) scale(0.8); opacity: 0; }
+}
+
+.sparkles-container {
+  position: absolute;
+  top: -12px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.sparkle {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 6px white;
+  animation: sparkle-float 1.8s infinite ease-in-out;
+}
+
+/* Character Sprite Styling */
+.minime-sprite {
+  position: relative;
+  transition: all 0.25s ease-out;
+}
+
+/* Responsive refinements for Desktop */
+@media (min-width: 768px) {
+  body {
+    padding: 24px;
+  }
+}

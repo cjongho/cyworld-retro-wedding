@@ -1,0 +1,336 @@
+/* src/styles/miniroom.css */
+
+/* Miniroom Container Grid */
+.miniroom-canvas {
+  width: 100%;
+  aspect-ratio: 1.5; /* Traditional Y2K miniroom aspect ratio */
+  background: #fbf0e8; /* Cozy pastel floor base */
+  border: 1px solid #d4c1b0;
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 10px rgba(124, 93, 65, 0.1);
+}
+
+.miniroom-title-bar {
+  background-color: #dfcdbd;
+  color: #7c5d41;
+  font-size: 9px;
+  font-weight: bold;
+  padding: 3px 8px;
+  border-bottom: 1px solid #d4c1b0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.miniroom-scenery {
+  width: 100%;
+  height: calc(100% - 16px);
+  position: relative;
+  /* 2.5D floor styling - Isometric perspective lines */
+  background-image: 
+    linear-gradient(135deg, rgba(124, 93, 65, 0.04) 25%, transparent 25%),
+    linear-gradient(225deg, rgba(124, 93, 65, 0.04) 25%, transparent 25%),
+    linear-gradient(45deg, rgba(124, 93, 65, 0.04) 25%, transparent 25%),
+    linear-gradient(315deg, rgba(124, 93, 65, 0.04) 25%, #fbf0e8 25%);
+  background-position: 20px 0, 20px 0, 0 0, 0 0;
+  background-size: 40px 40px;
+}
+
+/* Isometric placement helpers */
+.isometric-element {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  pointer-events: auto;
+}
+
+/* Specific item dimensions and coordinates */
+.camp-tree {
+  width: 50px;
+  height: 80px;
+  left: 15%;
+  top: 75%;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.camp-tree-right {
+  width: 52px;
+  height: 82px;
+  left: 85%;
+  top: 75%;
+  z-index: 10;
+}
+
+.wedding-arch {
+  width: 90px;
+  height: 105px;
+  left: 50%;
+  top: 60%;
+  z-index: 5;
+}
+
+.wedding-piano {
+  width: 45px;
+  height: 55px;
+  left: 28%;
+  top: 55%;
+  z-index: 6;
+  cursor: pointer;
+}
+
+.wedding-cake {
+  width: 25px;
+  height: 38px;
+  left: 72%;
+  top: 55%;
+  z-index: 6;
+}
+
+.avatar-groom {
+  left: 42%;
+  top: 72%;
+  z-index: 15;
+  cursor: pointer;
+}
+
+.avatar-bride {
+  left: 58%;
+  top: 72%;
+  z-index: 15;
+  cursor: pointer;
+}
+
+.avatar-guest {
+  left: 50%;
+  top: 86%;
+  z-index: 20;
+  cursor: pointer;
+}
+
+/* Floating Red Heart Balloon Invitation */
+.floating-present {
+  position: absolute;
+  left: 75%;
+  top: 15%;
+  z-index: 30;
+  cursor: pointer;
+  animation: float 2.5s infinite alternate ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.balloon-string {
+  width: 1px;
+  height: 25px;
+  background-color: #7c5d41;
+  opacity: 0.7;
+}
+
+.gift-box {
+  animation: wobble 1.5s infinite alternate ease-in-out;
+}
+
+/* Retro Dialogue Speech Bubbles */
+.ac-speech-bubble {
+  position: absolute;
+  background: white;
+  border: 1.5px solid #7c5d41;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 9px;
+  color: #333;
+  z-index: 50;
+  transform: translate(-50%, -100%);
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+  white-space: nowrap;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.ac-speech-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px 6px 0;
+  border-style: solid;
+  border-color: white transparent;
+  display: block;
+  width: 0;
+}
+
+.ac-speech-bubble::before {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 7px 7px 0;
+  border-style: solid;
+  border-color: #7c5d41 transparent;
+  display: block;
+  width: 0;
+  z-index: -1;
+}
+
+.groom-bubble {
+  left: 42%;
+  top: 48%;
+}
+
+.bride-bubble {
+  left: 58%;
+  top: 48%;
+}
+
+.guest-bubble {
+  left: 50%;
+  top: 60%;
+}
+
+.dialogue-arrow {
+  color: var(--cy-orange);
+  margin-left: 4px;
+  font-size: 8px;
+}
+
+/* Animations */
+@keyframes float {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-8px); }
+}
+
+@keyframes wobble {
+  0% { transform: rotate(-3deg); }
+  100% { transform: rotate(3deg); }
+}
+
+@keyframes tree-shake {
+  0% { transform: translate(-50%, -100%) rotate(0deg); }
+  20% { transform: translate(-50%, -100%) rotate(-3deg); }
+  40% { transform: translate(-50%, -100%) rotate(3deg); }
+  60% { transform: translate(-50%, -100%) rotate(-2deg); }
+  80% { transform: translate(-50%, -100%) rotate(2deg); }
+  100% { transform: translate(-50%, -100%) rotate(0deg); }
+}
+
+.tree-shake {
+  animation: tree-shake 0.6s ease-in-out;
+}
+
+@keyframes falling-acorn {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(180px) rotate(360deg); opacity: 0.8; }
+}
+
+.falling-acorn {
+  position: absolute;
+  z-index: 12;
+  cursor: pointer;
+  animation: falling-acorn 1.8s forwards linear;
+}
+
+@keyframes bounce {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-4px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translate(-50%, -90%); }
+  to { opacity: 1; transform: translate(-50%, -100%); }
+}
+
+/* Elegant Retro Letter Card Modal */
+.present-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 16px;
+}
+
+.present-card {
+  width: 100%;
+  max-width: 340px;
+  background: #fbf6f0;
+  border: 4px double #7c5d41;
+  border-radius: 8px;
+  padding: 16px;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  animation: scaleUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes scaleUp {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.present-card-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: bold;
+  color: #7c5d41;
+  cursor: pointer;
+}
+
+.present-card-title {
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  color: #7c5d41;
+  border-bottom: 2px solid #7c5d41;
+  padding-bottom: 6px;
+  margin-bottom: 12px;
+}
+
+.present-card-content {
+  text-align: center;
+  font-size: 11px;
+  color: #5c432d;
+  line-height: 1.6;
+}
+
+/* Home Tab grid list bgm etc */
+.home-bgm-widget {
+  margin-top: 10px;
+  background: white;
+  border: 1px dashed var(--cy-border-color);
+  border-radius: 4px;
+  padding: 8px;
+}
+
+.home-bgm-title {
+  font-size: 9px;
+  font-weight: bold;
+  color: var(--cy-orange);
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f1f1f1;
+  padding-bottom: 2px;
+}
+
+.bgm-list-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+  padding: 3px 0;
+  color: #555;
+  border-bottom: 1px dotted #f1f1f1;
+}
+
+.bgm-list-row:last-child {
+  border-bottom: none;
+}
